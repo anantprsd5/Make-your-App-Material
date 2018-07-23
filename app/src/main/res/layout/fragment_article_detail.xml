@@ -11,6 +11,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/detail_backdrop_height"
+        android:elevation="4dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -24,7 +25,8 @@
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="16dp"
             app:expandedTitleTextAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            app:layout_scrollFlags="scroll">
+            app:layout_scrollFlags="scroll"
+            app:toolbarId="@+id/toolbar">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -55,9 +57,10 @@
             </FrameLayout>
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:fitsSystemWindows="false"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -68,6 +71,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
@@ -94,12 +98,16 @@
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_share"
+        app:elevation="6dp"
+        app:fabSize="normal"
         app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        app:pressedTranslationZ="12dp" />
 
 </android.support.design.widget.CoordinatorLayout>
