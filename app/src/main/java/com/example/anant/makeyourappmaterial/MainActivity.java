@@ -1,5 +1,7 @@
 package com.example.anant.makeyourappmaterial;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -60,9 +62,6 @@ public class MainActivity extends AppCompatActivity implements
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-
-        final View toolbarContainerView = findViewById(R.id.toolbar_container);
-
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -71,12 +70,6 @@ public class MainActivity extends AppCompatActivity implements
         if (savedInstanceState == null) {
             refresh();
         }
-
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int height = size.y;
-        mSwipeRefreshLayout.setProgressViewOffset(false, -200, height / 9);
     }
 
     private void refresh() {
@@ -154,8 +147,9 @@ public class MainActivity extends AppCompatActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+                    Intent intent = new Intent(MainActivity.this, ArticleDetailsActivity.class);
+                    intent.putExtra("ItemUri", ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())).toString());
+                    startActivity(intent);
                 }
             });
             return vh;
