@@ -9,10 +9,10 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/detail_backdrop_height"
+        android:layout_height="@dimen/detail_appbar_height"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:elevation="0dp">
+        app:elevation="@dimen/landscape_appbar_elevation">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -20,9 +20,9 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginBottom="48dp"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="16dp"
+            app:expandedTitleMarginBottom="@dimen/expanded_title_margin_bottom"
+            app:expandedTitleMarginEnd="@dimen/expanded_title_margin_end"
+            app:expandedTitleMarginStart="@dimen/expanded_title_margin_start"
             app:expandedTitleTextAppearance="@style/Base.TextAppearance.AppCompat.Large"
             app:layout_scrollFlags="scroll"
             app:toolbarId="@+id/toolbar">
@@ -56,8 +56,8 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="12dp"
-        app:behavior_overlapTop="150dp"
+        android:elevation="@dimen/nested_scroll_view_elevation"
+        app:behavior_overlapTop="@dimen/overlap_top_dimens"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <RelativeLayout
@@ -66,10 +66,10 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/card"
-                android:layout_width="450dp"
+                android:layout_width="@dimen/card_view_width"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="16dp">
+                android:layout_margin="@dimen/card_view_layout_margin">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:padding="@dimen/title_layout_padding">
 
                         <TextView
                             android:id="@+id/title_text_view"
@@ -109,14 +109,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:paddingTop="80dp"
+                            android:paddingTop="@dimen/progress_bar_padding_top"
                             android:visibility="visible" />
 
                         <WebView
                             android:id="@+id/body_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="8dp"
+                            android:padding="@dimen/web_view_padding"
                             android:visibility="gone" />
 
                     </FrameLayout>
@@ -132,13 +132,13 @@
         android:id="@+id/fab_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_share"
-        app:elevation="6dp"
+        app:elevation="@dimen/fab_normal_elevation"
         app:fabSize="normal"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end"
-        app:pressedTranslationZ="12dp" />
+        app:pressedTranslationZ="@dimen/fab_pressed_elevation" />
 
 </android.support.design.widget.CoordinatorLayout>
