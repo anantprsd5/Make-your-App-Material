@@ -1,14 +1,11 @@
-package com.example.anant.makeyourappmaterial;
+package com.example.anant.makeyourappmaterial.ui;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,12 +21,12 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.anant.makeyourappmaterial.R;
 import com.example.anant.makeyourappmaterial.data.ArticleLoader;
 import com.example.anant.makeyourappmaterial.data.ItemsContract;
 import com.example.anant.makeyourappmaterial.data.UpdaterService;
@@ -148,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, ArticleDetailsActivity.class);
-                    intent.putExtra("ItemUri", ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())).toString());
+                    intent.putExtra(getString(R.string.item_key), ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())).toString());
                     startActivity(intent);
                 }
             });

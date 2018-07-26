@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Make Your App Material</string>
     <string name="action_share">Share</string>
+    <string name="item_key">ItemUri</string>
 </resources>

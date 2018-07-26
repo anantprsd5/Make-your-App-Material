@@ -2,4 +2,6 @@
 <resources>
     <dimen name="list_side_margin">2dp</dimen>
     <dimen name="detail_backdrop_height">320dp</dimen>
+    <dimen name="app_bar_height">72dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
 </resources>

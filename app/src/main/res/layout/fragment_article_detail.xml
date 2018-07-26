@@ -25,8 +25,7 @@
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="16dp"
             app:expandedTitleTextAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            app:layout_scrollFlags="scroll"
-            app:toolbarId="@+id/toolbar">
+            app:layout_scrollFlags="scroll">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -52,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="265dp"
                     android:padding="16dp"
+                    android:textColor="@android:color/white"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
             </FrameLayout>

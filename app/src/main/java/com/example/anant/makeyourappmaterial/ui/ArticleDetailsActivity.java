@@ -1,11 +1,10 @@
-package com.example.anant.makeyourappmaterial;
+package com.example.anant.makeyourappmaterial.ui;
 
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -16,12 +15,9 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.example.anant.makeyourappmaterial.R;
 import com.example.anant.makeyourappmaterial.data.ArticleLoader;
 import com.example.anant.makeyourappmaterial.data.ItemsContract;
 
@@ -61,7 +57,7 @@ public class ArticleDetailsActivity extends AppCompatActivity
 
         if (getIntent() != null) {
             mStartId = ItemsContract.Items.getItemId(
-                    Uri.parse(getIntent().getExtras().getString("ItemUri")));
+                    Uri.parse(getIntent().getExtras().getString(getString(R.string.item_key))));
         }
 
         applyWindowInsets();

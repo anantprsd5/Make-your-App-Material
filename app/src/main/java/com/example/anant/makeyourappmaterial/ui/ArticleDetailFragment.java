@@ -1,17 +1,18 @@
-package com.example.anant.makeyourappmaterial;
+package com.example.anant.makeyourappmaterial.ui;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateUtils;
@@ -22,11 +23,14 @@ import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.anant.makeyourappmaterial.R;
 import com.example.anant.makeyourappmaterial.data.ArticleLoader;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,12 +46,12 @@ import static android.content.ContentValues.TAG;
 public class ArticleDetailFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    private CoordinatorLayout coordinatorLayout;
-
     public static final String ARG_ITEM_ID = "item_id";
     private long mItemId;
 
     private View mRootView;
+
+    private LinearLayout titleLayout;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
 
@@ -90,7 +94,7 @@ public class ArticleDetailFragment extends Fragment implements
                         .getIntent(), getString(R.string.action_share)));
             }
         });
-        coordinatorLayout = mRootView.findViewById(R.id.main_content);
+        titleLayout = mRootView.findViewById(R.id.title_layout);
         return mRootView;
     }
 
@@ -125,11 +129,12 @@ public class ArticleDetailFragment extends Fragment implements
 
     private void bindViews(Cursor mCursor) {
 
-        ImageView imageView = mRootView.findViewById(R.id.backdrop);
+        final ImageView imageView = mRootView.findViewById(R.id.backdrop);
         Toolbar toolbar = mRootView.findViewById(R.id.toolbar_title);
         TextView authorText = mRootView.findViewById(R.id.author_text_view);
         final WebView bodyText = mRootView.findViewById(R.id.body_text);
         final ProgressBar progressBar = mRootView.findViewById(R.id.indeterminateBar);
+        TextView titleTextView = mRootView.findViewById(R.id.title_text_view);
         getActivityCast().setSupportActionBar(toolbar);
         getActivityCast().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getActivityCast().getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -145,6 +150,10 @@ public class ArticleDetailFragment extends Fragment implements
         final String body = Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")).toString();
 
         toolbar.setTitle(title);
+        if (titleTextView != null) {
+            titleTextView.setText(title);
+            toolbar.setTitle("");
+        }
         Date publishedDate = parsePublishedDate(mCursor);
         if (!publishedDate.before(START_OF_EPOCH.getTime())) {
             authorText.setText(Html.fromHtml(
@@ -152,9 +161,9 @@ public class ArticleDetailFragment extends Fragment implements
                             publishedDate.getTime(),
                             System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                             DateUtils.FORMAT_ABBREV_ALL).toString()
-                            + " by <font color='#ffffff'>"
+                            + " by "
                             + mCursor.getString(ArticleLoader.Query.AUTHOR)
-                            + "</font>"));
+            ));
 
         } else {
             // If date is before 1902, just show the string
@@ -177,7 +186,27 @@ public class ArticleDetailFragment extends Fragment implements
 
         Picasso.get()
                 .load(photo)
-                .into(imageView);
+                .into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        imageView.setImageBitmap(bitmap);
+                        Palette p = Palette.from(bitmap).generate();
+                        int backgroundColor = ContextCompat.getColor(getActivity(),
+                                R.color.colorPrimaryDark);
+                        if(titleLayout!=null)
+                            titleLayout.setBackgroundColor(p.getDarkMutedColor(backgroundColor));
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
     }
 
     private Date parsePublishedDate(Cursor mCursor) {
