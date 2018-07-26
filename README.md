@@ -1,6 +1,6 @@
 # Make-your-App-Material
 
-    XYZ Reader: A mock RSS feed reader featuring banner photos and headlines. Download the code here.
+    XYZ Reader: A mock RSS feed reader featuring banner photos and headlines.
 
 The app is currently functional, and work in most cases for most users.
 
